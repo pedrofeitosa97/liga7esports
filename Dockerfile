@@ -15,6 +15,9 @@ COPY shared/package.json   ./shared/package.json
 # Instala todas as deps (dev incluída — necessário para tsc + prisma CLI)
 RUN npm ci
 
+# Expõe binários do node_modules raiz (nest, prisma, etc.) para todos os workspaces
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
 # Copia o fonte
 COPY shared/   ./shared/
 COPY backend/  ./backend/
