@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-/** Base da API Nest (`/api` incluso). Sobrescreva com NEXT_PUBLIC_API_URL no .env / Vercel. */
-const DEFAULT_PRODUCTION_API_URL = 'https://liga7esports-api.railway.app/api';
-
+/** Em produção usa o proxy Next.js (/api/proxy) para evitar CORS do Railway. */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
   (process.env.NODE_ENV === 'production'
-    ? DEFAULT_PRODUCTION_API_URL
+    ? '/api/proxy'
     : 'http://localhost:3001/api');
 
 export const api = axios.create({
