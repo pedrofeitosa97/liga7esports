@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+/**
+ * Em produção o padrão é `/liga7-api` (rewrite no next.config → BACKEND_ORIGIN).
+ * Evita CORS quando a edge da Railway devolve Access-Control-Allow-Origin errado.
+ * Para chamar a API direto, defina NEXT_PUBLIC_API_URL (ex.: local).
+ */
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL?.trim() ||
+  (process.env.NODE_ENV === 'production' ? '/liga7-api' : 'http://localhost:3001/api');
 
 export const api = axios.create({
   baseURL: API_URL,
