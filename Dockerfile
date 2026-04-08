@@ -1,57 +1,33 @@
-# ── Build stage ───────────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:20-slim
 WORKDIR /app
 
-RUN apk add --no-cache openssl
-
+ENV NODE_ENV=production
 ENV HUSKY=0
 
-# Copy workspace manifests first (layer cache)
+# OpenSSL para o Prisma (necessário no Debian slim)
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+# Workspace manifests (cache de camadas)
 COPY package.json package-lock.json ./
 COPY backend/package.json  ./backend/package.json
 COPY shared/package.json   ./shared/package.json
 
-# Install all deps (includes dev — needed for tsc + prisma CLI)
+# Instala todas as deps (dev incluída — necessário para tsc + prisma CLI)
 RUN npm ci
 
-# Copy source
+# Copia o fonte
 COPY shared/   ./shared/
 COPY backend/  ./backend/
 
-# Generate Prisma client BEFORE build (enums são necessários para o tsc)
+# Gera o Prisma client ANTES do build (enums necessários para o tsc)
 RUN cd backend && npx prisma generate
 
-# Build NestJS → backend/dist/
+# Compila NestJS → backend/dist/
 RUN npm run build --workspace=backend
 
-# ── Production stage ──────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
-WORKDIR /app
+# Remove devDependencies após o build
+RUN npm prune --omit=dev
 
-RUN apk add --no-cache openssl
-
-ENV NODE_ENV=production
-# Husky não existe em prod — evita falha no "prepare" script do root package.json
-ENV HUSKY=0
-
-# Copy workspace manifests
-COPY package.json package-lock.json ./
-COPY backend/package.json  ./backend/package.json
-COPY shared/package.json   ./shared/package.json
-
-# Production deps only (+ prisma moved to deps for migrate deploy)
-RUN npm ci --omit=dev
-
-# Built output from builder
-COPY --from=builder /app/backend/dist     ./backend/dist
-
-# Prisma schema + migrations (needed for migrate deploy at runtime)
-COPY --from=builder /app/backend/prisma   ./backend/prisma
-
-# Re-generate Prisma client in production node_modules
-RUN cd backend && npx prisma generate
-
-# Entrypoint script
 COPY docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
 
