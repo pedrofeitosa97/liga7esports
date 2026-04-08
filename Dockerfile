@@ -2,6 +2,8 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+RUN apk add --no-cache openssl
+
 ENV HUSKY=0
 
 # Copy workspace manifests first (layer cache)
@@ -25,6 +27,8 @@ RUN npm run build --workspace=backend
 # ── Production stage ──────────────────────────────────────────────────────────
 FROM node:20-alpine AS runner
 WORKDIR /app
+
+RUN apk add --no-cache openssl
 
 ENV NODE_ENV=production
 # Husky não existe em prod — evita falha no "prepare" script do root package.json
