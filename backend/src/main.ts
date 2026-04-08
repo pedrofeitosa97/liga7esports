@@ -5,12 +5,48 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 
+function parseCorsOrigins(): string[] {
+  const raw =
+    process.env.CORS_ORIGINS?.trim() ||
+    process.env.FRONTEND_URL?.trim() ||
+    'http://localhost:3000';
+  return raw
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function isVercelPreviewOrigin(origin: string): boolean {
+  if (process.env.CORS_ALLOW_VERCEL_PREVIEWS !== 'true') return false;
+  try {
+    const u = new URL(origin);
+    return u.protocol === 'https:' && u.hostname.endsWith('.vercel.app');
+  } catch {
+    return false;
+  }
+}
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // CORS
+  const allowedOrigins = parseCorsOrigins();
+
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      if (allowedOrigins.includes(origin)) {
+        callback(null, origin);
+        return;
+      }
+      if (isVercelPreviewOrigin(origin)) {
+        callback(null, origin);
+        return;
+      }
+      callback(null, false);
+    },
     credentials: true,
   });
 
