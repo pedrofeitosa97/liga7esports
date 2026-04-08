@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
-import { HttpModule } from '@nestjs/axios';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
@@ -15,7 +14,6 @@ import { HealthModule } from './health/health.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TerminusModule,
-    HttpModule,
     PrismaModule,
     AuthModule,
     UsersModule,

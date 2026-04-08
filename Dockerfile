@@ -16,11 +16,11 @@ RUN npm ci
 COPY shared/   ./shared/
 COPY backend/  ./backend/
 
+# Generate Prisma client BEFORE build (enums são necessários para o tsc)
+RUN cd backend && npx prisma generate
+
 # Build NestJS → backend/dist/
 RUN npm run build --workspace=backend
-
-# Generate Prisma client
-RUN cd backend && npx prisma generate
 
 # ── Production stage ──────────────────────────────────────────────────────────
 FROM node:20-alpine AS runner
