@@ -21,7 +21,7 @@
     "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
     "test": "npm run test --workspace=frontend",
     "type-check": "npm run type-check --workspace=frontend",
-    "prepare": "husky"
+    "prepare": "node -e \"if(!process.env.CI && process.env.HUSKY !== '0') require('child_process').execSync('husky', {stdio:'inherit'});\""
   },
   "lint-staged": {
     "frontend/src/**/*.{ts,tsx}": [
