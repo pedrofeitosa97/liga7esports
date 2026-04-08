@@ -5,6 +5,13 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 
+/** Origin do browser nunca termina com "/"; URLs em env costumam ter barra final. */
+function normalizeOrigin(url: string): string {
+  const t = url.trim();
+  if (t.endsWith('/')) return t.slice(0, -1);
+  return t;
+}
+
 function parseCorsOrigins(): string[] {
   const raw =
     process.env.CORS_ORIGINS?.trim() ||
@@ -12,7 +19,7 @@ function parseCorsOrigins(): string[] {
     'http://localhost:3000';
   return raw
     .split(',')
-    .map((s) => s.trim())
+    .map((s) => normalizeOrigin(s))
     .filter(Boolean);
 }
 
@@ -37,7 +44,7 @@ async function bootstrap() {
         callback(null, true);
         return;
       }
-      if (allowedOrigins.includes(origin)) {
+      if (allowedOrigins.includes(normalizeOrigin(origin))) {
         callback(null, origin);
         return;
       }
