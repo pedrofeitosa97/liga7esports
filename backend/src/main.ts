@@ -39,6 +39,36 @@ async function bootstrap() {
   const allowedOrigins = parseCorsOrigins();
   console.log('[CORS] Allowed origins:', allowedOrigins);
 
+  // Middleware manual para sobrescrever qualquer header de CORS injetado pelo proxy do Railway
+  app.use((req: any, res: any, next: any) => {
+    const origin = req.headers['origin'];
+    if (!origin) return next();
+
+    const normalized = normalizeOrigin(origin);
+    const allowed =
+      allowedOrigins.includes(normalized) || isVercelPreviewOrigin(origin);
+
+    if (allowed) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+      res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      );
+      res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type,Authorization,Accept',
+      );
+    }
+
+    if (req.method === 'OPTIONS') {
+      res.statusCode = 204;
+      return res.end();
+    }
+
+    next();
+  });
+
   app.enableCors({
     origin: (origin, callback) => {
       if (!origin) {
