@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 /**
- * Produção: `/api/proxy` → Route Handler em app/api/proxy (BACKEND_ORIGIN na Vercel).
- * Evita CORS com a API na Railway. Local: API direta em localhost:3001.
+ * Produção: `/api/proxy` → rewrite em vercel.json para a API na Railway (edge Vercel).
+ * Local: `http://localhost:3001/api`.
  */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
