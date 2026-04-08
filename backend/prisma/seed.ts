@@ -299,9 +299,9 @@ async function main() {
   // ─────────────────────────────────────────────────────────────────────────
   const t2 = await prisma.tournament.create({
     data: {
-      title: 'Valorant Weekly Cup — Semana 14',
-      game: 'valorant',
-      description: 'Torneio semanal 5v5 em formato de grupos. Os 2 primeiros de cada grupo avançam.',
+      title: 'Copa eFootball 2025 — Grupos',
+      game: 'efootball-2025',
+      description: 'Torneio semanal em formato de grupos. Os 2 primeiros de cada grupo avançam.',
       creatorId: demo.id,
       format: TournamentFormat.GRUPOS,
       status: TournamentStatus.EM_ANDAMENTO,
@@ -433,8 +433,8 @@ async function main() {
   // ─────────────────────────────────────────────────────────────────────────
   const t3 = await prisma.tournament.create({
     data: {
-      title: 'Liga Fortnite Solo — Temporada 2',
-      game: 'fortnite',
+      title: 'Liga FIFA 23 — Temporada 2',
+      game: 'fifa-23',
       description: 'Campeonato pontos corridos, todos jogam contra todos. O mais consistente vence.',
       creatorId: demo.id,
       format: TournamentFormat.PONTOS_CORRIDOS,
@@ -570,16 +570,16 @@ async function main() {
   // ─────────────────────────────────────────────────────────────────────────
   const t4 = await prisma.tournament.create({
     data: {
-      title: 'Rocket League 3v3 — Copa Maio',
-      game: 'rocket-league',
-      description: 'Inscrições abertas para o torneio de Rocket League. Formato mata-mata com 8 vagas.',
+      title: 'EA Sports FC 25 — Copa Maio',
+      game: 'ea-fc-25',
+      description: 'Inscrições abertas para o torneio de EA FC 25. Formato mata-mata com 8 vagas.',
       creatorId: p1.id,
       format: TournamentFormat.MATA_MATA,
       status: TournamentStatus.ABERTO,
       maxPlayers: 8,
       entryFee: 15,
       prize: 'R$ 300 + Medalha Digital',
-      rules: '1. Partidas BO3\n2. Overtime se empate\n3. Sem bumping intencional',
+      rules: '1. Partidas BO3\n2. Prorrogação e pênaltis se empate\n3. Sem modificações de equipe',
     },
   });
 
