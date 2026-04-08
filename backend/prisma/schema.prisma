@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TournamentFormat {
+  MATA_MATA
+  GRUPOS
+  PONTOS_CORRIDOS
+}
+
+enum TournamentStatus {
+  ABERTO
+  EM_ANDAMENTO
+  FINALIZADO
+}
+
+enum MatchStatus {
+  PENDENTE
+  EM_ANDAMENTO
+  FINALIZADO
+  WO
+}
+
+model User {
+  id          String   @id @default(cuid())
+  username    String   @unique
+  email       String   @unique
+  password    String
+  avatarUrl   String?
+  gamesPlayed Int      @default(0)
+  wins        Int      @default(0)
+  losses      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  createdTournaments Tournament[]
+  registrations      Registration[]
+  player1Matches     Match[]        @relation("Player1")
+  player2Matches     Match[]        @relation("Player2")
+  wonMatches         Match[]        @relation("Winner")
+  badges             UserBadge[]
+
+  @@map("users")
+}
+
+model Tournament {
+  id          String           @id @default(cuid())
+  title       String
+  game        String
+  description String?
+  creatorId   String
+  entryFee    Float?
+  rules       String?
+  format      TournamentFormat
+  status      TournamentStatus @default(ABERTO)
+  maxPlayers  Int              @default(16)
+  startDate   DateTime?
+  imageUrl    String?
+  prize       String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  creator       User           @relation(fields: [creatorId], references: [id])
+  registrations Registration[]
+  matches       Match[]
+  rounds        Round[]
+
+  @@map("tournaments")
+}
+
+model Registration {
+  id           String   @id @default(cuid())
+  userId       String
+  tournamentId String
+  createdAt    DateTime @default(now())
+
+  user       User       @relation(fields: [userId], references: [id])
+  tournament Tournament @relation(fields: [tournamentId], references: [id])
+
+  @@unique([userId, tournamentId])
+  @@map("registrations")
+}
+
+model Round {
+  id           String  @id @default(cuid())
+  tournamentId String
+  roundNumber  Int
+  name         String?
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id])
+  matches    Match[]
+
+  @@map("rounds")
+}
+
+model Match {
+  id           String      @id @default(cuid())
+  tournamentId String
+  roundId      String?
+  player1Id    String?
+  player2Id    String?
+  score1       Int?
+  score2       Int?
+  winnerId     String?
+  status       MatchStatus @default(PENDENTE)
+  scheduledAt  DateTime?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id])
+  round      Round?     @relation(fields: [roundId], references: [id])
+  player1    User?      @relation("Player1", fields: [player1Id], references: [id])
+  player2    User?      @relation("Player2", fields: [player2Id], references: [id])
+  winner     User?      @relation("Winner", fields: [winnerId], references: [id])
+
+  @@map("matches")
+}
+
+model Badge {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String
+  imageUrl    String
+  condition   String
+
+  userBadges UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id       String   @id @default(cuid())
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  badge Badge @relation(fields: [badgeId], references: [id])
+
+  @@unique([userId, badgeId])
+  @@map("user_badges")
+}

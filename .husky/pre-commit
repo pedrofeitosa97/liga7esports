@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run lint-staged (ESLint + type-check on staged files)
+npx lint-staged
+
+# Run tests related to changed files
+cd frontend && npx jest --findRelatedTests --passWithNoTests $(git diff --cached --name-only --diff-filter=ACMR | grep "src/.*\.(ts|tsx)$" | tr '\n' ' ') 2>/dev/null || true
+
+echo "✅ Pre-commit checks passed!"

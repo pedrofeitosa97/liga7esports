@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🚀 Running pre-push checks..."
+
+# Full type-check
+npm run type-check --workspace=frontend
+
+# Full test suite
+npm run test:ci --workspace=frontend
+
+echo "✅ Pre-push checks passed!"
