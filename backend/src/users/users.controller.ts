@@ -87,7 +87,7 @@ export class UsersController {
       },
     }),
   )
-  uploadAvatar(@Request() req, @UploadedFile() file: Express.Multer.File) {
+  uploadAvatar(@Request() req, @UploadedFile() file: { filename: string; [key: string]: unknown }) {
     const avatarUrl = `/uploads/avatars/${file.filename}`;
     return this.usersService.updateAvatar(req.user.id, avatarUrl);
   }
