@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-/**
- * Produção: `/api/proxy` → rewrite em vercel.json para a API na Railway (edge Vercel).
- * Local: `http://localhost:3001/api`.
- */
+/** Base da API Nest (`/api` incluso). Sobrescreva com NEXT_PUBLIC_API_URL no .env / Vercel. */
+const DEFAULT_PRODUCTION_API_URL = 'https://liga7esports-api.railway.app/api';
+
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
-  (process.env.NODE_ENV === 'production' ? '/api/proxy' : 'http://localhost:3001/api');
+  (process.env.NODE_ENV === 'production'
+    ? DEFAULT_PRODUCTION_API_URL
+    : 'http://localhost:3001/api');
 
 export const api = axios.create({
   baseURL: API_URL,
