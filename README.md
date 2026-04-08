@@ -4,13 +4,13 @@ Plataforma completa de campeonatos de jogos virtuais (EA Sports FC 26, Valorant,
 
 ## Stack Técnico
 
-| Camada | Tecnologia |
-|--------|------------|
+| Camada   | Tecnologia                                                              |
+| -------- | ----------------------------------------------------------------------- |
 | Frontend | Next.js 14, React, Tailwind CSS, Zustand, TanStack Query, Framer Motion |
-| Backend | NestJS, Prisma ORM, JWT Auth, Swagger |
-| Banco | PostgreSQL |
-| Tipagem | TypeScript (monorepo compartilhado) |
-| UI | Design iOS, fonte Manrope, tema escuro/claro |
+| Backend  | NestJS, Prisma ORM, JWT Auth, Swagger                                   |
+| Banco    | PostgreSQL                                                              |
+| Tipagem  | TypeScript (monorepo compartilhado)                                     |
+| UI       | Design iOS, fonte Manrope, tema escuro/claro                            |
 
 ---
 
@@ -59,6 +59,7 @@ npx ts-node prisma/seed.ts
 ```
 
 Isso cria as tabelas e popula com dados de exemplo, incluindo:
+
 - Conta demo: `demo@liga7.gg` / `demo123`
 - 3 campeonatos de demonstração
 - 5 badges de exemplo
@@ -83,6 +84,7 @@ Acesse: `http://localhost:3001/api/docs`
 ## Funcionalidades
 
 ### Usuários
+
 - [x] Cadastro e login com JWT
 - [x] Perfil com avatar (upload de imagem)
 - [x] Estatísticas (vitórias, derrotas, win rate)
@@ -90,6 +92,7 @@ Acesse: `http://localhost:3001/api/docs`
 - [x] Ranking global
 
 ### Campeonatos
+
 - [x] Criar campeonatos personalizados (3 etapas guiadas)
 - [x] Suporte a 11 jogos (EA FC 26, Valorant, Fortnite, etc.)
 - [x] 3 formatos: Mata-Mata, Grupos, Pontos Corridos
@@ -99,12 +102,14 @@ Acesse: `http://localhost:3001/api/docs`
 - [x] Compartilhamento via link
 
 ### Partidas
+
 - [x] Geração automática por formato
 - [x] Registro de resultados (criador ou participante)
 - [x] Avanço automático no mata-mata
 - [x] Visualização de bracket interativo
 
 ### UI/UX
+
 - [x] Design iOS moderno com tema escuro
 - [x] Responsivo (mobile-first)
 - [x] Animações suaves (Framer Motion)
@@ -145,19 +150,9 @@ GET    /api/badges/me               Minhas badges
 
 ---
 
-## ⚠️ Nota Importante sobre Estrutura de Rotas
-
-O arquivo `frontend/src/app/(main)/page.tsx` deve ser **deletado** — ele entraria em conflito com `frontend/src/app/page.tsx` (ambos roteiam para `/`). O conteúdo da homepage está em `app/(main)/_HomePageContent.tsx` e é importado por `app/page.tsx`.
-
-```bash
-# Rode este comando antes de fazer build:
-rm frontend/src/app/\(main\)/page.tsx
-```
-
----
-
 ## Dados de Demonstração
 
 Após o seed, use a conta demo:
+
 - **E-mail:** `demo@liga7.gg`
 - **Senha:** `demo123`
