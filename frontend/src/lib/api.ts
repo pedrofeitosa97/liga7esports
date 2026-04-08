@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-/** Em produção usa o rewrite do Vercel (/api → Railway) para evitar CORS. */
+/** Em produção usa o rewrite do Vercel (/api → Railway) para evitar CORS.
+ *  Backend: https://liga7esports-production.up.railway.app */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
   (process.env.NODE_ENV === 'production'

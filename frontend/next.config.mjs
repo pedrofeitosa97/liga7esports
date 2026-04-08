@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://liga7esports-api.railway.app/api/:path*',
+        destination: 'https://liga7esports-production.up.railway.app/api/:path*',
       },
     ];
   },
