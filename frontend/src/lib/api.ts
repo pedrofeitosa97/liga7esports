@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-/** Em produção usa o proxy Next.js (/api/proxy) para evitar CORS do Railway. */
+/** Em produção usa o rewrite do Vercel (/api → Railway) para evitar CORS. */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
   (process.env.NODE_ENV === 'production'
-    ? '/api/proxy'
+    ? '/api'
     : 'http://localhost:3001/api');
 
 export const api = axios.create({
