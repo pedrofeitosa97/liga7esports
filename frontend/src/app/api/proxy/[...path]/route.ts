@@ -19,7 +19,7 @@ function backendBase(): string {
 }
 
 async function proxy(req: NextRequest, pathSegments: string[]) {
-  if (!pathSegments.length) {
+  if (!pathSegments?.length) {
     return NextResponse.json({ error: 'Missing API path' }, { status: 404 });
   }
 
@@ -72,44 +72,33 @@ async function proxy(req: NextRequest, pathSegments: string[]) {
   return out;
 }
 
-export async function GET(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+type RouteCtx = { params: Promise<{ path: string[] }> | { path: string[] } };
+
+async function resolveSegments(ctx: RouteCtx): Promise<string[]> {
+  const p = await Promise.resolve(ctx.params);
+  return Array.isArray(p.path) ? p.path : [];
 }
 
-export async function POST(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+export async function GET(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
 }
 
-export async function PUT(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+export async function POST(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
 }
 
-export async function PATCH(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+export async function PUT(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
 }
 
-export async function DELETE(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+export async function PATCH(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
 }
 
-export async function OPTIONS(
-  req: NextRequest,
-  ctx: { params: { path: string[] } },
-) {
-  return proxy(req, ctx.params.path);
+export async function DELETE(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
+}
+
+export async function OPTIONS(req: NextRequest, ctx: RouteCtx) {
+  return proxy(req, await resolveSegments(ctx));
 }

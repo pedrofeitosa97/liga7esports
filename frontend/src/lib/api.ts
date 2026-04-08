@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 /**
- * Em produção o padrão é `/liga7-api` (rewrite no next.config → BACKEND_ORIGIN).
- * Evita CORS quando a edge da Railway devolve Access-Control-Allow-Origin errado.
- * Para chamar a API direto, defina NEXT_PUBLIC_API_URL (ex.: local).
+ * Produção: `/api/proxy` → Route Handler em app/api/proxy (BACKEND_ORIGIN na Vercel).
+ * Evita CORS com a API na Railway. Local: API direta em localhost:3001.
  */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL?.trim() ||
-  (process.env.NODE_ENV === 'production' ? '/liga7-api' : 'http://localhost:3001/api');
+  (process.env.NODE_ENV === 'production' ? '/api/proxy' : 'http://localhost:3001/api');
 
 export const api = axios.create({
   baseURL: API_URL,
