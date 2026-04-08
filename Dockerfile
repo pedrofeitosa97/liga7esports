@@ -12,11 +12,11 @@ COPY package.json package-lock.json ./
 COPY backend/package.json  ./backend/package.json
 COPY shared/package.json   ./shared/package.json
 
+# Instala nest CLI globalmente (evita problema de PATH com npm workspaces)
+RUN npm install -g @nestjs/cli
+
 # Instala todas as deps (dev incluída — necessário para tsc + prisma CLI)
 RUN npm ci
-
-# Expõe binários do node_modules raiz (nest, prisma, etc.) para todos os workspaces
-ENV PATH="/app/node_modules/.bin:${PATH}"
 
 # Copia o fonte
 COPY shared/   ./shared/
@@ -26,7 +26,7 @@ COPY backend/  ./backend/
 RUN cd backend && npx prisma generate
 
 # Compila NestJS → backend/dist/
-RUN npm run build --workspace=backend
+RUN cd backend && nest build
 
 # Remove devDependencies após o build
 RUN npm prune --omit=dev
