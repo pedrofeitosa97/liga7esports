@@ -2,6 +2,8 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+ENV HUSKY=0
+
 # Copy workspace manifests first (layer cache)
 COPY package.json package-lock.json ./
 COPY backend/package.json  ./backend/package.json
@@ -25,6 +27,8 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+# Husky não existe em prod — evita falha no "prepare" script do root package.json
+ENV HUSKY=0
 
 # Copy workspace manifests
 COPY package.json package-lock.json ./
