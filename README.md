@@ -1,4 +1,4 @@
-# Arena7 Esports — Plataforma de Campeonatos
+# LIGA7ESPORTS — Plataforma de Campeonatos
 
 Plataforma completa de campeonatos de jogos virtuais (EA Sports FC 26, Valorant, Fortnite, etc.), inspirada no Battlefy. Design iOS moderno com fonte Manrope.
 
@@ -17,7 +17,7 @@ Plataforma completa de campeonatos de jogos virtuais (EA Sports FC 26, Valorant,
 ## Estrutura do Projeto
 
 ```
-arena7esports-monorepo/
+liga7esports-monorepo/
 ├── frontend/          → Next.js 14 (porta 3000)
 ├── backend/           → NestJS (porta 3001)
 ├── shared/            → Tipos TypeScript compartilhados
@@ -46,7 +46,7 @@ Crie um banco PostgreSQL e configure a string de conexão:
 
 ```bash
 # backend/.env (já criado como exemplo)
-DATABASE_URL="postgresql://postgres:SUA_SENHA@localhost:5432/arena7esports?schema=public"
+DATABASE_URL="postgresql://postgres:SUA_SENHA@localhost:5432/liga7esports?schema=public"
 JWT_SECRET="seu-secret-aqui"
 ```
 
@@ -59,7 +59,7 @@ npx ts-node prisma/seed.ts
 ```
 
 Isso cria as tabelas e popula com dados de exemplo, incluindo:
-- Conta demo: `demo@arena7.gg` / `demo123`
+- Conta demo: `demo@liga7.gg` / `demo123`
 - 3 campeonatos de demonstração
 - 5 badges de exemplo
 
@@ -159,5 +159,5 @@ rm frontend/src/app/\(main\)/page.tsx
 ## Dados de Demonstração
 
 Após o seed, use a conta demo:
-- **E-mail:** `demo@arena7.gg`
+- **E-mail:** `demo@liga7.gg`
 - **Senha:** `demo123`

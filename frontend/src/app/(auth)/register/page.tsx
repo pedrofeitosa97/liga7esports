@@ -37,7 +37,7 @@ export default function RegisterPage() {
     onSuccess: (res) => {
       const { accessToken, user } = res.data;
       setAuth(user, accessToken);
-      toast.success('Conta criada com sucesso! Bem-vindo à Arena7! 🎉');
+      toast.success('Conta criada com sucesso! Bem-vindo à Liga7! 🎉');
       router.push('/');
     },
     onError: (err: any) => {

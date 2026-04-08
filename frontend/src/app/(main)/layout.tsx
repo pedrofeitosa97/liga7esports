@@ -9,7 +9,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       </main>
       <footer className="border-t border-surface-border py-6 text-center">
         <p className="text-xs text-text-muted">
-          © 2026 Arena7 Esports · Plataforma de Campeonatos Online
+          © 2026 LIGA7ESPORTS · Plataforma de Campeonatos Online
         </p>
       </footer>
     </div>

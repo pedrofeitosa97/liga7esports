@@ -10,7 +10,7 @@ export const api = axios.create({
 // Request interceptor to attach JWT
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('arena7_token');
+    const token = localStorage.getItem('liga7_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -28,7 +28,7 @@ api.interceptors.response.use(
     // Only force logout on 401s from protected endpoints (not login/register)
     if (isUnauthorized && !isAuthEndpoint) {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('arena7_token');
+        localStorage.removeItem('liga7_token');
         const currentPath = window.location.pathname;
         if (currentPath !== '/login' && currentPath !== '/register') {
           window.location.href = '/login';

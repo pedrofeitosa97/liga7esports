@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
 
       setAuth: (user, token) => {
-        localStorage.setItem('arena7_token', token);
+        localStorage.setItem('liga7_token', token);
         set({ user, token, isAuthenticated: true });
       },
 
@@ -40,13 +40,13 @@ export const useAuthStore = create<AuthState>()(
         })),
 
       logout: () => {
-        localStorage.removeItem('arena7_token');
-        localStorage.removeItem('arena7_user');
+        localStorage.removeItem('liga7_token');
+        localStorage.removeItem('liga7_user');
         set({ user: null, token: null, isAuthenticated: false });
       },
     }),
     {
-      name: 'arena7_auth',
+      name: 'liga7_auth',
       partialize: (state) => ({
         user: state.user,
         token: state.token,

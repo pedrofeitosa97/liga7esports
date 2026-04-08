@@ -67,8 +67,8 @@ async function main() {
   const [demo, p1, p2, p3, p4, p5, p6, p7, p8] = await Promise.all([
     prisma.user.create({
       data: {
-        username: 'Arena7Demo',
-        email: 'demo@arena7.gg',
+        username: 'Liga7Demo',
+        email: 'demo@liga7.gg',
         password: await hash('demo123'),
         gamesPlayed: 20,
         wins: 13,
@@ -78,7 +78,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'KingOfFC',
-        email: 'king@arena7.gg',
+        email: 'king@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 18,
         wins: 11,
@@ -88,7 +88,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'ValorantPro',
-        email: 'valo@arena7.gg',
+        email: 'valo@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 15,
         wins: 9,
@@ -98,7 +98,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'SniperElite',
-        email: 'sniper@arena7.gg',
+        email: 'sniper@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 12,
         wins: 7,
@@ -108,7 +108,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'DragonSlayer',
-        email: 'dragon@arena7.gg',
+        email: 'dragon@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 10,
         wins: 4,
@@ -118,7 +118,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'NightStalker',
-        email: 'night@arena7.gg',
+        email: 'night@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 14,
         wins: 8,
@@ -128,7 +128,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'PhoenixRise',
-        email: 'phoenix@arena7.gg',
+        email: 'phoenix@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 8,
         wins: 3,
@@ -138,7 +138,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'TigerClaw',
-        email: 'tiger@arena7.gg',
+        email: 'tiger@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 16,
         wins: 10,
@@ -148,7 +148,7 @@ async function main() {
     prisma.user.create({
       data: {
         username: 'IronFist',
-        email: 'iron@arena7.gg',
+        email: 'iron@liga7.gg',
         password: await hash('senha123'),
         gamesPlayed: 11,
         wins: 5,
@@ -160,12 +160,12 @@ async function main() {
   console.log('👥 9 usuários criados');
 
   // ─────────────────────────────────────────────────────────────────────────
-  // TORNEIO 1 — Copa Arena7 FC 26 (MATA_MATA, 8 jogadores)
+  // TORNEIO 1 — Copa Liga7 FC 26 (MATA_MATA, 8 jogadores)
   // Bracket: Quartas → Semis → Final
   // ─────────────────────────────────────────────────────────────────────────
   const t1 = await prisma.tournament.create({
     data: {
-      title: 'Copa Arena7 FC 26 — Abril 2026',
+      title: 'Copa Liga7 FC 26 — Abril 2026',
       game: 'ea-fc-26',
       description: 'O maior torneio de EA Sports FC 26 da plataforma. Eliminação direta com 8 jogadores.',
       creatorId: demo.id,
@@ -603,15 +603,15 @@ async function main() {
   // ── Resumo ────────────────────────────────────────────────────────────────
   console.log('\n✅ Seed concluído!\n');
   console.log('👤 Usuários:');
-  console.log('   demo@arena7.gg   / demo123   → Arena7Demo');
-  console.log('   king@arena7.gg   / senha123  → KingOfFC');
-  console.log('   valo@arena7.gg   / senha123  → ValorantPro');
-  console.log('   sniper@arena7.gg / senha123  → SniperElite');
-  console.log('   dragon@arena7.gg / senha123  → DragonSlayer');
-  console.log('   night@arena7.gg  / senha123  → NightStalker');
-  console.log('   phoenix@arena7.gg/ senha123  → PhoenixRise');
-  console.log('   tiger@arena7.gg  / senha123  → TigerClaw');
-  console.log('   iron@arena7.gg   / senha123  → IronFist');
+  console.log('   demo@liga7.gg   / demo123   → Liga7Demo');
+  console.log('   king@liga7.gg   / senha123  → KingOfFC');
+  console.log('   valo@liga7.gg   / senha123  → ValorantPro');
+  console.log('   sniper@liga7.gg / senha123  → SniperElite');
+  console.log('   dragon@liga7.gg / senha123  → DragonSlayer');
+  console.log('   night@liga7.gg  / senha123  → NightStalker');
+  console.log('   phoenix@liga7.gg/ senha123  → PhoenixRise');
+  console.log('   tiger@liga7.gg  / senha123  → TigerClaw');
+  console.log('   iron@liga7.gg   / senha123  → IronFist');
   console.log('\n🏟️  Torneios:');
   console.log('   [1] Copa FC 26       — MATA_MATA    — EM_ANDAMENTO — Quartas/Semis/Final');
   console.log('   [2] Valorant Weekly  — GRUPOS       — EM_ANDAMENTO — Grupo A + Grupo B');

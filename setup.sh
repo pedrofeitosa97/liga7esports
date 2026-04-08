@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Arena7 Esports — Setup"
+echo "🚀 LIGA7ESPORTS — Setup"
 echo "========================="
 
 # Remove the conflicting page (route group page that conflicts with root app/page.tsx)
@@ -23,7 +23,7 @@ echo "  2. cd backend && npx prisma@5 migrate dev --name init"
 echo "  3. cd backend && npx ts-node prisma/seed.ts"
 echo "  4. npm run dev  (from project root)"
 echo ""
-echo "  Demo account: demo@arena7.gg / demo123"
+echo "  Demo account: demo@liga7.gg / demo123"
 echo "  Frontend: http://localhost:3000"
 echo "  Backend:  http://localhost:3001/api"
 echo "  Swagger:  http://localhost:3001/api/docs"

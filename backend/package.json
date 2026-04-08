@@ -1,7 +1,7 @@
 {
-  "name": "@arena7/backend",
+  "name": "@liga7/backend",
   "version": "1.0.0",
-  "description": "Arena7 Esports - NestJS Backend",
+  "description": "LIGA7ESPORTS - NestJS Backend",
   "scripts": {
     "build": "nest build",
     "start": "node dist/main",

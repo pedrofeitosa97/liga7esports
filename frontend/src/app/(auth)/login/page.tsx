@@ -94,11 +94,11 @@ export default function LoginPage() {
       {/* Demo credentials */}
       <div className="glass-card p-3 text-center">
         <p className="text-xs text-text-muted mb-1 font-semibold">Conta de demonstração</p>
-        <p className="text-xs text-text-tertiary font-mono">demo@arena7.gg / demo123</p>
+        <p className="text-xs text-text-tertiary font-mono">demo@liga7.gg / demo123</p>
         <button
           type="button"
           onClick={() => {
-            loginMutation.mutate({ email: 'demo@arena7.gg', password: 'demo123' });
+            loginMutation.mutate({ email: 'demo@liga7.gg', password: 'demo123' });
           }}
           className="text-xs text-brand-400 hover:text-brand-300 font-semibold mt-1 transition-colors"
         >

@@ -84,7 +84,7 @@ export default function SettingsPage() {
         Sair da conta
       </Button>
 
-      <p className="text-center text-xs text-text-muted">Arena7 Esports v1.0.0</p>
+      <p className="text-center text-xs text-text-muted">LIGA7ESPORTS v1.0.0</p>
     </div>
   );
 }

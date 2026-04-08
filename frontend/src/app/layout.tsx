@@ -13,12 +13,12 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'Arena7 Esports — Plataforma de Campeonatos',
+  title: 'LIGA7ESPORTS — Plataforma de Campeonatos',
   description:
     'Crie, organize e participe de campeonatos online de EA Sports FC, Valorant, Fortnite e muito mais.',
   keywords: 'campeonatos, esports, torneios, valorant, fortnite, fifa, ea fc',
   openGraph: {
-    title: 'Arena7 Esports',
+    title: 'LIGA7ESPORTS',
     description: 'A maior plataforma de campeonatos online do Brasil',
     type: 'website',
   },

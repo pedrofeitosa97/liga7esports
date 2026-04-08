@@ -262,7 +262,7 @@ export default function CreateTournamentPage() {
 
             <Input
               label="Nome do campeonato *"
-              placeholder={`Copa ${selectedGame?.name || 'Arena7'} 2026`}
+              placeholder={`Copa ${selectedGame?.name || 'Liga7'} 2026`}
               error={errors.title?.message}
               leftIcon={<Trophy className="w-4 h-4" />}
               {...register('title', {

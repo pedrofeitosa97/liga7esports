@@ -6,7 +6,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { TournamentFormat } from '@prisma/client';
 
 export class CreateTournamentDto {
-  @ApiProperty({ example: 'Copa Arena7 FC 26' })
+  @ApiProperty({ example: 'Copa Liga7 FC 26' })
   @IsString()
   @MinLength(3)
   @MaxLength(100)

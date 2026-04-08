@@ -21,6 +21,6 @@ export const useUIStore = create<UIState>()(
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
     }),
-    { name: 'arena7_ui' },
+    { name: 'liga7_ui' },
   ),
 );

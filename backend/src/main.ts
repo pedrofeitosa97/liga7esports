@@ -34,8 +34,8 @@ async function bootstrap() {
   // Swagger docs
   if (process.env.NODE_ENV !== 'production') {
     const config = new DocumentBuilder()
-      .setTitle('Arena7 Esports API')
-      .setDescription('API da plataforma de campeonatos Arena7 Esports')
+      .setTitle('LIGA7ESPORTS API')
+      .setDescription('API da plataforma de campeonatos LIGA7ESPORTS')
       .setVersion('1.0')
       .addBearerAuth()
       .build();
@@ -45,7 +45,7 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3001;
   await app.listen(port);
-  console.log(`🚀 Arena7 Esports API running on http://localhost:${port}/api`);
+  console.log(`🚀 LIGA7ESPORTS API running on http://localhost:${port}/api`);
   console.log(`📚 Swagger docs: http://localhost:${port}/api/docs`);
 }
 
